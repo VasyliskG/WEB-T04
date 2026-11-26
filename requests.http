@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:3000
+@resource = gadgets
+
+### List all gadgets (also check X-API-Version and X-Service-Status)
+GET {{baseUrl}}/{{resource}}
+
+### Search by title, case-insensitively
+GET {{baseUrl}}/{{resource}}?search=НОУТБУК
+
+### Limit the result list
+GET {{baseUrl}}/{{resource}}?limit=1
+
+### Get an existing gadget
+GET {{baseUrl}}/{{resource}}/1
+
+### Check the 404 response
+GET {{baseUrl}}/{{resource}}/99999
+
+### Create a gadget (expect 201 Created)
+POST {{baseUrl}}/{{resource}}
+Content-Type: application/json
+
+{
+  "title": "Планшет Air",
+  "price": 22000,
+  "warrantyMonths": 12,
+  "cpu": "A17",
+  "ramGb": 8
+}
+
+### Partially update a gadget (expect 200 OK)
+PATCH {{baseUrl}}/{{resource}}/1
+Content-Type: application/json
+
+{
+  "price": 21000
+}
+
+### Delete a gadget (expect 204 No Content; run last)
+DELETE {{baseUrl}}/{{resource}}/1
